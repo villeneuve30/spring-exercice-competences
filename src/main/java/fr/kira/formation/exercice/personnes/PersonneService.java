@@ -17,14 +17,14 @@ import java.util.Set;
 @Service
 public class PersonneService extends CRUDService<Personne> {
 
-    @Autowired
-    private PersonneRepository personneRepository;
+    private final PersonneRepository personneRepository;
 
-    @Autowired
-    private CompetenceService competenceService;
+    private final CompetenceService competenceService;
 
-    public PersonneService(PersonneRepository personneRepository) {
+    public PersonneService(PersonneRepository personneRepository, CompetenceService competenceService) {
         super(personneRepository);
+        this.personneRepository = personneRepository;
+        this.competenceService = competenceService;
     }
 
     public List<Personne> findByNom(String nom) {
@@ -58,7 +58,7 @@ public class PersonneService extends CRUDService<Personne> {
 
         personneBdd.getCompetencesAcquises().add(nouvelleCompetence);
 
-        personneRepository.save(personneBdd);
+        save(personneBdd);
     }
 
     public boolean aCompetenceAvecNiveau(Set<PersonneCompetence> competences, Competence competenceRecherchee, Integer niveauRecherche) {
