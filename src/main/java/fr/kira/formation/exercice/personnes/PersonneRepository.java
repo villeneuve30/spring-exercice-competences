@@ -9,4 +9,6 @@ public interface PersonneRepository extends JpaRepository<Personne, Long> {
     List<Personne> findByNom(String nom);
 
     List<Personne> findByPrenom(String prenom);
+
+    Personne findByUsername(String username);
 }

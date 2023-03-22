@@ -1,13 +1,16 @@
 package fr.kira.formation.exercice.personnes;
 
 
+import fr.kira.formation.exercice.auth.roles.Role;
 import fr.kira.formation.exercice.equipes.Equipe;
 import fr.kira.formation.exercice.personne_competence.PersonneCompetence;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 
 @Entity
@@ -28,6 +31,12 @@ public class Personne {
 
     private Boolean isManager;
 
+    private String username;
+    private String password;
+
+    @ManyToMany
+    @ToString.Exclude
+    private List<Role> roles = new ArrayList<>();
     @ManyToOne
     @JoinColumn(name = "equipe_id")
     private Equipe equipe;
